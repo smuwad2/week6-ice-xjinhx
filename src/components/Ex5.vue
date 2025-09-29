@@ -12,9 +12,32 @@ export default {
             currentThemeIndex: 0
         }
     },
-    
+    computed: {
+        currentTheme() {
+            return this.themes[this.currentThemeIndex];
+        },
+        currentBgColor() {
+            const colors = {
+                dark: '#333',
+                light: '#fff',
+                neon: '#39ff14'
+            };
+            return colors[this.currentTheme];
+        },
+        currentTextColor() {
+            const colors = {
+                dark: '#fff',
+                light: '#000',
+                neon: '#000'
+            };
+            return colors[this.currentTheme];
+        }
+    },
     methods: {
         // Add code here
+        cycleTheme() {
+            this.currentThemeIndex = (this.currentThemeIndex + 1) % this.themes.length;
+}
 
     }
 }
@@ -39,7 +62,7 @@ export default {
             <input id="imageUrl" v-model="imageUrl" placeholder="https://example.com/me.jpg"><br><br>
 
             <label>Theme Presets:</label><br>
-            <button class="theme-button">Cycle theme</button> <!-- click button to cycle through the themes -->
+            <button class="theme-button" @click="cycleTheme">Cycle theme</button> <!-- click button to cycle through the themes -->
             <!-- Dark theme: background-color: #333, text-color: #fff -->
             <!-- Light theme: background-color: #fff, text-color: #000  -->
             <!-- Neon theme: background-color: #39ff14, text-color: #000 -->
@@ -48,7 +71,7 @@ export default {
         <!-- Preview Section -->
         <div class="preview-section">
             <h2>Live Preview</h2>
-            <div class="preview-card"> <!-- Add code here to set background color and text color -->
+            <div class="preview-card" :style="{ backgroundColor: currentBgColor, color: currentTextColor }"> <!-- Add code here to set background color and text color -->
                 <img :src="imageUrl" class="preview-img">
                 <h3>{{ name || 'Your Name' }}</h3>
                 <h4>{{ job || 'Job Title' }}</h4>
