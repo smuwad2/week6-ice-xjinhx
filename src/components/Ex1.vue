@@ -2,6 +2,16 @@
     export default { 
         // Add Code Here
         // challenge: use array  
+        // if use div, wont be inline
+        data(){
+            return {
+                message : "Choose your favourite fruit: ",
+                fruit1 : "apple",
+                fruit2 : "orange",
+                fruit3 : "peach",
+                fruits : ['apple','orange','banana']
+            }
+        } 
     }
 </script>
 
